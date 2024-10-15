@@ -29,7 +29,11 @@ export class StudentService {
       where: {
         id: Number(id),
       },
-      data,
+      data: {
+        name: data.name,
+        age: data.age,
+        gender: data.gender,
+      },
     });
   }
 
