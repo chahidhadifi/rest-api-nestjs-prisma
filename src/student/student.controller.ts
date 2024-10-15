@@ -1,7 +1,18 @@
-import { Delete, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Req,
+  Res,
+} from '@nestjs/common';
 import { Student } from './student.model';
 import { StudentService } from './student.service';
 
+@Controller('api/v1/students')
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
@@ -16,7 +27,7 @@ export class StudentController {
   }
 
   @Post()
-  async createStudent(student: Student): Promise<Student> {
+  async createStudent(@Body() student: Student): Promise<Student> {
     return this.studentService.createStudent(student);
   }
 
@@ -28,7 +39,7 @@ export class StudentController {
   @Put(':id')
   async updateStudent(
     @Param('id') id: string,
-    student: Student,
+    @Body() student: Student,
   ): Promise<Student> {
     return this.studentService.updateStudent(Number(id), student);
   }
